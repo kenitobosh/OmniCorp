@@ -2,8 +2,7 @@ package Main;
 
 import javax.security.auth.login.LoginException;
 
-import Commands.Commands;
-import Events.GuildMessageReceived;
+import Events.*;
 import net.dv8tion.jda.api.AccountType;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -17,12 +16,22 @@ public class Main
     // Main method
     public static void main(String[] args) throws LoginException
     {
-        // Have fun with my token ;D
-        jda = new JDABuilder(AccountType.BOT).setToken("NzM1MTU3NzY4Mzk0MjQ0MTA2.XxcXfQ.dEF4XGkc5m0KiFsDqCPiUChKiPY").build();
+
+        jda = new JDABuilder(AccountType.BOT).setToken("").build();
         jda.getPresence().setStatus(OnlineStatus.ONLINE);
 
-        jda.addEventListener(new Commands());
-        jda.addEventListener(new GuildMessageReceived());
+        // Commands Listener
+        jda.addEventListener(new Commands.Censor());
+        jda.addEventListener(new Commands.Check());
+        jda.addEventListener(new Commands.Clear());
+        jda.addEventListener(new Commands.Filter());
+        jda.addEventListener(new Commands.Info());
+        jda.addEventListener(new Commands.Invite());
+        jda.addEventListener(new Commands.Remove());
+
+        //EventListener
+        jda.addEventListener(new Censorship());
+
 
     }
 }
